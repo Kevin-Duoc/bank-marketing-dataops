@@ -1,0 +1,4 @@
+2026-04-23 17:19:40,965 - INFO - Conectando a Kaggle para descargar: aakashjoshi123/virtual-reality-experiences
+2026-04-23 17:19:42,293 - INFO - Ingesta exitosa. Archivos guardados en c:\Users\VI-Alumno\Downloads\PIPELINE-VR\src\..\data\raw
+2026-04-23 17:39:02,739 - INFO - Iniciando la limpieza de datos de Realidad Virtual
+2026-04-23 17:39:02,747 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Downloads\PIPELINE-VR\src\..\data\processed\vr_clean.csv
