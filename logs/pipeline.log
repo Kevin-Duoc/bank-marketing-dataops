@@ -2,3 +2,17 @@
 2026-04-23 17:19:42,293 - INFO - Ingesta exitosa. Archivos guardados en c:\Users\VI-Alumno\Downloads\PIPELINE-VR\src\..\data\raw
 2026-04-23 17:39:02,739 - INFO - Iniciando la limpieza de datos de Realidad Virtual
 2026-04-23 17:39:02,747 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Downloads\PIPELINE-VR\src\..\data\processed\vr_clean.csv
+2026-04-29 13:58:35,536 - INFO - Iniciando la limpieza de datos de Realidad Virtual
+2026-04-29 13:58:35,544 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Gestion-datos-IA\Gestion-datos-IA\src\..\data\processed\vr_clean.csv
+2026-04-29 14:00:51,709 - INFO - Conectando a Kaggle para descargar: aakashjoshi123/virtual-reality-experiences
+2026-04-29 14:00:53,218 - INFO - Ingesta exitosa. Archivos guardados en c:\Users\VI-Alumno\Gestion-datos-IA\Gestion-datos-IA\src\..\data\raw
+2026-04-29 14:02:09,311 - INFO - Iniciando la limpieza de datos de Realidad Virtual
+2026-04-29 14:02:09,319 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Gestion-datos-IA\Gestion-datos-IA\src\..\data\processed\vr_clean.csv
+2026-04-29 14:02:10,696 - INFO - Iniciando la limpieza de datos de Realidad Virtual
+2026-04-29 14:02:10,703 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Gestion-datos-IA\Gestion-datos-IA\src\..\data\processed\vr_clean.csv
+2026-04-29 14:16:27,509 - INFO - Iniciando validación con PANDERA...
+2026-04-29 14:16:27,527 - INFO - \u2705 Validación terminada. Válidos: 1000 | Errores detectados: 0
+2026-04-29 14:21:47,785 - INFO - Iniciando validación con PANDERA...
+2026-04-29 14:21:47,801 - INFO - Validación terminada. Válidos: 1000 | Errores detectados: 0
+2026-04-29 14:26:41,934 - INFO - Iniciando validación con PANDERA...
+2026-04-29 14:26:41,957 - INFO - Validación terminada. Válidos: 1000 | Errores detectados: 0
