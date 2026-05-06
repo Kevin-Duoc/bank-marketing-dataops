@@ -1,6 +1,6 @@
 # Pipeline de Datos - Realidad Virtual (VR)
 
-Este proyecto implementa un pipeline de datos automatizado para la ingesta, limpieza y validación de un dataset sobre experiencias en Realidad Virtual.
+Este proyecto implementa un pipeline de datos automatizado para la ingesta, limpieza, validación y carga en base de datos de un dataset sobre experiencias en Realidad Virtual.
 
 ## Estructura del Proyecto
 * `/data/raw/`: Contiene el dataset original descargado desde la API de Kaggle.
@@ -9,6 +9,7 @@ Este proyecto implementa un pipeline de datos automatizado para la ingesta, limp
 * `/src/ingesta.py`: Script que se conecta a Kaggle, autentica el token y descarga los datos automáticamente.
 * `/src/limpieza.py`: Script que procesa los datos crudos aplicando transformaciones.
 * `/src/validacion.py`: Script que aplica contratos de datos (Pandera) para validación estructural y semántica.
+* `/src/carga.py`: Script que automatiza la creación de tablas y carga de datos validados en MySQL.
 * `/logs/`: Almacena el registro de ejecución del pipeline (`pipeline.log`).
 
 ## Transformaciones Aplicadas (Limpieza)
@@ -23,3 +24,11 @@ Se implementó un script de validación utilizando la librería **Pandera** (`sr
 - **Validaciones Estructurales:** Se verificó la unicidad de la clave primaria (`UserID`), se exigió que la duración (`Duration`) no sea nula, y se controló que la edad sea un número positivo mayor a 0.
 - **Validaciones Semánticas:** Se filtraron registros con edades fuera del rango lógico (10 a 100 años) y se verificó que la columna `Riesgo_Mareo` solo contenga los valores permitidos ('Alto Riesgo', 'Bajo Riesgo').
 - **Manejo de Errores:** Los datos que superan el contrato se guardan en `vr_validated.csv`. Los registros que no cumplen las reglas son capturados y guardados en un reporte automático en `/data/reports/errores_pandera.csv`.
+
+## Carga de Datos a Base de Datos (MySQL)
+Se implementó un proceso de carga controlada (`src/carga.py`) para persistir los datos validados en un entorno relacional:
+- **Conexión Robusta:** Uso de `mysql-connector-python` para la comunicación con un servidor MySQL local (XAMPP).
+- **Modelo de Datos:** Creación automática de la tabla `usuarios_vr` definiendo tipos de datos óptimos (`INT`, `FLOAT`, `VARCHAR`).
+- **Integridad de Datos:** Filtrado de columnas previo a la inserción para asegurar la correspondencia exacta entre el archivo procesado y la estructura de la base de datos.
+- **Eficiencia:** Inserción masiva de 1000 registros mediante `executemany` con manejo de transacciones (`commit`).
+- **Trazabilidad:** Registro detallado de la conexión, creación de tablas e inserciones exitosas en los logs del sistema.

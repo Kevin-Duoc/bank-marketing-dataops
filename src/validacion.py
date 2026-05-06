@@ -11,7 +11,7 @@ logging.basicConfig(filename=log_path, level=logging.INFO,
 
 def validar_con_pandera(ruta_entrada, ruta_validos, ruta_reporte_errores):
     try:
-        logging.info("Iniciando validación con PANDERA...")
+        logging.info("Iniciando validacion con PANDERA...")
         print("Escaneando datos con el esquema de Pandera...")
         
         #lee los datos limpios
@@ -61,7 +61,7 @@ def validar_con_pandera(ruta_entrada, ruta_validos, ruta_reporte_errores):
         if not errores.empty:
             errores.to_csv(ruta_reporte_errores, index=False)
 
-        mensaje = f"Validación terminada. Válidos: {len(validos)} | Errores detectados: {len(errores)}"
+        mensaje = f"Validacion terminada. Validos: {len(validos)} | Errores detectados: {len(errores)}"
         logging.info(mensaje)
         print(mensaje)
         if not errores.empty:
