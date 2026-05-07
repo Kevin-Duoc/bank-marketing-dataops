@@ -63,3 +63,13 @@
 2026-05-06 14:33:34,363 - INFO - Tabla 'usuarios_vr' creada o reiniciada con éxito.
 2026-05-06 14:33:34,396 - INFO - CARGA EXITOSA: Se insertaron 1000 registros en MySQL.
 2026-05-06 14:33:34,397 - INFO - Conexión a MySQL cerrada.
+2026-05-07 18:29:17,861 - INFO - Conectando a Kaggle para descargar: aakashjoshi123/virtual-reality-experiences
+2026-05-07 18:29:19,319 - INFO - Ingesta exitosa. Archivos guardados en c:\Users\VI-Alumno\Gestion-datos-IA\src\..\data\raw
+2026-05-07 18:29:44,201 - INFO - Iniciando la limpieza de datos de Realidad Virtual
+2026-05-07 18:29:44,210 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Gestion-datos-IA\src\..\data\processed\vr_clean.csv
+2026-05-07 18:30:34,461 - ERROR - ERROR CRITICO: Falta instalar una libreria. Ejecuta 'pip install pandas pandera'. Detalle: No module named 'pandera'
+2026-05-07 18:31:01,068 - INFO - Iniciando validacion con PANDERA...
+2026-05-07 18:31:01,085 - INFO - Validacion terminada. Validos: 1000 | Errores detectados: 0
+2026-05-07 18:31:06,845 - ERROR - ERROR CRITICO: Falta instalar una libreria. Ejecuta 'pip install pandas mysql-connector-python'. Detalle: No module named 'mysql'
+2026-05-07 18:31:51,060 - INFO - Iniciando fase de CARGA a MySQL...
+2026-05-07 18:31:51,068 - ERROR - Error critico en la carga: Authentication plugin 'caching_sha2_password' is not supported

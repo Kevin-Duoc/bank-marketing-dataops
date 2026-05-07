@@ -1,13 +1,22 @@
-import pandas as pd
-import pandera.pandas as pa
-from pandera.errors import SchemaErrors
+import sys
 import os
 import logging
 
-#1. configuracion logs
+#configuracion de logs
 log_path = os.path.join(os.path.dirname(__file__), '..', 'logs', 'pipeline.log')
 logging.basicConfig(filename=log_path, level=logging.INFO, 
                     format='%(asctime)s - %(levelname)s - %(message)s')
+
+#control de dependencias
+try:
+    import pandas as pd
+    import pandera.pandas as pa
+    from pandera.errors import SchemaErrors
+except ImportError as e:
+    mensaje_error = f"ERROR CRITICO: Falta instalar una libreria. Ejecuta 'pip install pandas pandera'. Detalle: {e}"
+    print(mensaje_error)
+    logging.error(mensaje_error)
+    sys.exit(1)  # Detiene la ejecución del script
 
 def validar_con_pandera(ruta_entrada, ruta_validos, ruta_reporte_errores):
     try:
@@ -17,46 +26,40 @@ def validar_con_pandera(ruta_entrada, ruta_validos, ruta_reporte_errores):
         #lee los datos limpios
         df = pd.read_csv(ruta_entrada)
         
-        # --- DEFINICIÓN DEL CONTRATO DE DATOS (ESQUEMA) ---
-        #se le dice a pandora como debe ser el archivo perfecto
+        #ESQUEMA CONTRATO DE DATOS
+        #se le dice a Pandora como debe ser el archivo perfecto
         schema = pa.DataFrameSchema({
-            #3 reglas estructurales
-            "UserID": pa.Column(int, unique=True),               # 1. Clave primaria única
-            "Duration": pa.Column(float, nullable=False),        # 2. No puede estar vacío (nulo)
+            "UserID": pa.Column(int, unique=True),   
+            "Duration": pa.Column(float, nullable=False),
             "Age": pa.Column(int, checks=[
-                pa.Check.greater_than(0),                        # 3. La edad debe ser mayor a 0
-                
-                # REGLAS SEMÁNTICAS (Mínimo 2)
-                pa.Check.in_range(10, 100)                       # 1. Rango lógico de edad (10 a 100 años)
+                pa.Check.greater_than(0),     
+                pa.Check.in_range(10, 100)   
             ]),
             "Riesgo_Mareo": pa.Column(str, checks=[
-                pa.Check.isin(['Alto Riesgo', 'Bajo Riesgo'])    # 2. Solo se permiten estos dos textos exactos
+                pa.Check.isin(['Alto Riesgo', 'Bajo Riesgo'])
             ])
         })
 
-        # --- EJECUCIÓN DE LA VALIDACIÓN ---
+        ##EJECUCION DE LA VALIDACION
         try:
-            # lazy=True hace que revise TODO el archivo antes de detenerse
+            #lazy=True hace que revise TODO el archivo antes de detenerse
             df_validado = schema.validate(df, lazy=True)
             
-            # Si pasa directo aquí, es que todo estaba 100% perfecto
             validos = df_validado
             errores = pd.DataFrame()
             
         except SchemaErrors as err:
-            # Si Pandera encuentra errores, los atrapamos aquí
-            # err.failure_cases es un reporte automático de Pandera con lo que falló
+            #si Pandera encuentra errores, quedan atrapados aqui 
             errores = err.failure_cases
             
-            # Separamos las filas buenas de las malas
+            #separación de filas buenas y malas
             indices_malos = errores['index'].dropna().unique()
             validos = df[~df.index.isin(indices_malos)]
 
-        # --- GUARDAR RESULTADOS ---
-        # Guardar los datos buenos
+        #guarda los datos buenos
         validos.to_csv(ruta_validos, index=False)
         
-        # Guardar el reporte de errores
+        #guarda el reporte de errores
         os.makedirs(os.path.dirname(ruta_reporte_errores), exist_ok=True)
         if not errores.empty:
             errores.to_csv(ruta_reporte_errores, index=False)
@@ -68,8 +71,8 @@ def validar_con_pandera(ruta_entrada, ruta_validos, ruta_reporte_errores):
             print(f"Reporte de errores detallado en: {ruta_reporte_errores}")
 
     except Exception as e:
-        logging.error(f"Error crítico en validación: {e}")
-        print(f"Ocurrió un error crítico: {e}")
+        logging.error(f"Error critico en validacion: {e}")
+        print(f"Ocurrio un error critico: {e}")
 
 if __name__ == "__main__":
     archivo_entrada = os.path.join(os.path.dirname(__file__), '..', 'data', 'processed', 'vr_clean.csv')

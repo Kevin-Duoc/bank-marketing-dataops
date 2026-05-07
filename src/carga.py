@@ -1,19 +1,27 @@
-import pandas as pd
-import mysql.connector
-from mysql.connector import Error
+import sys
 import os
 import logging
 
-# 1. Configurar Logs (Requisito de la actividad) 
+#configuracion de logs
 log_path = os.path.join(os.path.dirname(__file__), '..', 'logs', 'pipeline.log')
 logging.basicConfig(filename=log_path, level=logging.INFO, 
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
+#control de dependencias
+try:
+    import pandas as pd
+    import mysql.connector
+    from mysql.connector import Error
+except ImportError as e:
+    mensaje_error = f"ERROR CRITICO: Falta instalar una libreria. Ejecuta 'pip install pandas mysql-connector-python'. Detalle: {e}"
+    print(mensaje_error)
+    logging.error(mensaje_error)
+    sys.exit(1) #detiene script
+
 def cargar_datos_mysql():
     connection = None
     try:
-        # 2. Configuración de Conexión 
-        # AJUSTA ESTOS DATOS SEGÚN TU INSTALACIÓN
+        #configuracion de conexion
         config = {
             'user': 'root',
             'password': 'root',
@@ -27,8 +35,7 @@ def cargar_datos_mysql():
         if connection.is_connected():
             cursor = connection.cursor()
             
-            # 3. Crear Tabla según tipos de datos (DDL) 
-            # Usaremos los campos del dataset de VR que ya validaste
+            #creación de tablas según tipos de datos (DDL) 
             cursor.execute("DROP TABLE IF EXISTS usuarios_vr;")
             cursor.execute("""
                 CREATE TABLE usuarios_vr (
@@ -41,22 +48,21 @@ def cargar_datos_mysql():
                     Riesgo_Mareo VARCHAR(50)
                 );
             """)
-            logging.info("Tabla 'usuarios_vr' creada o reiniciada con éxito.")
+            logging.info("Tabla 'usuarios_vr' creada o reiniciada con exito.")
 
-            # 4. Leer datos validados
+            #lectura de datos validados
             ruta_csv = os.path.join(os.path.dirname(__file__), '..', 'data', 'processed', 'vr_validated.csv')
             df = pd.read_csv(ruta_csv)
 
-            # --- LA SOLUCIÓN: FILTRAR Y ORDENAR COLUMNAS ---
-            # Seleccionamos solo las 7 columnas exactas que la tabla de MySQL está esperando
+            #filtrar y ordenar las 7 columnas exactas que la tabla de MySQL está esperando
             columnas_bd = ['UserID', 'Age', 'Gender', 'VRHeadset', 'Duration', 'MotionSickness', 'Riesgo_Mareo']
             df_filtrado = df[columnas_bd]
 
-            # 5. Inserción Controlada (DML)
+            # 6. Inserción Controlada (DML)
             sql_insert = """INSERT INTO usuarios_vr (UserID, Age, Gender, VRHeadset, Duration, MotionSickness, Riesgo_Mareo) 
                             VALUES (%s, %s, %s, %s, %s, %s, %s)"""
             
-            # Convertimos el DataFrame ya filtrado a una lista de tuplas
+            #convertir el DataFrame ya filtrado a una lista de tuplas
             datos = [tuple(x) for x in df_filtrado.values]
             
             cursor.executemany(sql_insert, datos)
@@ -67,7 +73,7 @@ def cargar_datos_mysql():
             logging.info(mensaje)
 
     except Error as e:
-        mensaje_error = f"Error crítico en la carga: {e}"
+        mensaje_error = f"Error critico en la carga: {e}"
         print(mensaje_error)
         logging.error(mensaje_error)
     
@@ -75,7 +81,7 @@ def cargar_datos_mysql():
         if connection and connection.is_connected():
             cursor.close()
             connection.close()
-            logging.info("Conexión a MySQL cerrada.")
+            logging.info("Conexion a MySQL cerrada.")
 
 if __name__ == "__main__":
     cargar_datos_mysql()
