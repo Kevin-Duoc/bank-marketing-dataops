@@ -1,0 +1,14 @@
+# Entornos virtuales
+venv/
+env/
+
+# Archivos compilados de Python
+__pycache__/
+*.pyc
+
+# Claves o credenciales (Seguridad de AWS)
+*.pem
+*.key
+keys/
+
+#de momento NO ignorar pipeline.log y data/02_bank.csv por temas de rubrica y ejecucion de demo

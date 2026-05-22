@@ -1,0 +1,17 @@
+2026-05-21 23:40:33,628 - INFO - --- INICIANDO PIPELINE DATAOPS ---
+2026-05-21 23:40:33,628 - INFO - Fase 1: Iniciando extracción de datos (Pandas)...
+2026-05-21 23:40:33,650 - INFO - Ingesta exitosa. Volumen ingerido: 11162 filas y 1 columnas.
+2026-05-21 23:52:19,578 - INFO - --- INICIANDO PIPELINE DATAOPS ---
+2026-05-21 23:52:19,578 - INFO - Fase 1: Iniciando extraccion de datos (Pandas)...
+2026-05-21 23:52:19,594 - INFO - Ingesta exitosa. Volumen ingerido: 11162 filas y 17 columnas.
+2026-05-22 01:09:58,299 - INFO - === CONFIGURACION DE PRUEBA INCREMENTAL ===
+2026-05-22 01:09:58,300 - INFO - --- INICIANDO PIPELINE DATAOPS ---
+2026-05-22 01:09:58,300 - INFO - Fase 1: Iniciando extraccion de datos (Pandas)...
+2026-05-22 01:09:58,315 - INFO - Ingesta exitosa. Volumen ingerido: 11162 filas y 17 columnas.
+2026-05-22 01:09:58,315 - INFO - Fase 2: Iniciando proceso de limpieza y transformacion...
+2026-05-22 01:09:58,322 - INFO - Limpieza: No se detectaron registros duplicados en el dataset.
+2026-05-22 01:09:58,325 - INFO - Limpieza: Cero valores nulos detectados. Calidad de celdas estricta aprobada.
+2026-05-22 01:09:58,325 - INFO - Limpieza finalizada exitosamente. Volumen limpio en RAM: 11162 filas.
+2026-05-22 01:09:58,326 - INFO - Fase 3: Iniciando validacion de Contratos de Datos (Pandera)...
+2026-05-22 01:09:58,392 - INFO - Validacion exitosa: Todos los registros cumplen con el contrato de calidad.
+2026-05-22 01:09:58,392 - INFO - Integracion local exitosa. Dataset listo para carga. Filas: 11162
