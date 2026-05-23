@@ -1,4 +1,4 @@
-# Pipeline de Datos - Optimización de Campañas de Marketing Bancario 🚀
+# Pipeline de Datos - Optimización de Campañas de Marketing Bancario
 
 Este proyecto implementa un pipeline de datos automatizado (ETL) bajo prácticas **DataOps** para la ingesta, limpieza, validación semántica y carga centralizada de un dataset sobre depósitos a plazo fijo e historiales financieros del banco.
 
