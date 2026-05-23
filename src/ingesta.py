@@ -1,43 +1,50 @@
 import os
+import shutil
 import logging
 
-# 1. autenticación directa (inyectar Token de Kaggle)
-os.environ['KAGGLE_API_TOKEN'] = "KGAT_28055ab7c96d802b7c1274a88abc2a48"
-from kaggle.api.kaggle_api_extended import KaggleApi
-
-# 2. configurar los logs (el registro de actividad)
+# 1. Configurar los logs (el registro de actividad)
 log_path = os.path.join(os.path.dirname(__file__), '..', 'logs', 'pipeline.log')
 os.makedirs(os.path.dirname(log_path), exist_ok=True)
 logging.basicConfig(filename=log_path, level=logging.INFO, 
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-def ingerir_desde_kaggle(dataset_id, ruta_destino):
+def ingerir_desde_local(ruta_origen, ruta_destino):
     try:
-        logging.info(f"Conectando a Kaggle para descargar: {dataset_id}")
-        print("Autenticando con Kaggle y descargando datos...")
+        logging.info(f"Iniciando ingesta desde ruta local: {ruta_origen}")
+        print("Buscando el archivo CSV...")
         
-        # 3. inicia la API
-        api = KaggleApi()
-        api.authenticate()
+        # 2. Verificar si el archivo realmente existe en la ruta origen
+        if not os.path.exists(ruta_origen):
+            raise FileNotFoundError(f"No se encontro el archivo en: {ruta_origen}")
         
-        # 4. crea la carpeta raw si no existe
+        # 3. Crea la carpeta de destino (data/raw) si no existe
         os.makedirs(ruta_destino, exist_ok=True)
         
-        # 5. descarga y descomprime directamente
-        api.dataset_download_files(dataset_id, path=ruta_destino, unzip=True)
+        # Definir la ruta completa de destino
+        nombre_archivo = os.path.basename(ruta_origen)
+        destino_completo = os.path.join(ruta_destino, nombre_archivo)
         
-        logging.info(f"Ingesta exitosa. Archivos guardados en {ruta_destino}")
-        print(f"Dataset descargado y descomprimido correctamente en {ruta_destino}!")
+        # 4. Copiar el archivo a la carpeta de datos crudos
+        shutil.copy(ruta_origen, destino_completo)
+        
+        logging.info(f"Ingesta exitosa. Archivo copiado a {destino_completo}")
+        print(f"¡Archivo '{nombre_archivo}' copiado correctamente a {ruta_destino}!")
 
     except Exception as e:
-        logging.error(f"Error en la conexión a Kaggle: {e}")
-        print(f"Ocurrió un error: {e}")
+        logging.error(f"Error en la ingesta local: {e}")
+        print(f"Ocurrio un error: {e}")
 
 if __name__ == "__main__":
-    #id del dataset
-    dataset_kaggle = "aakashjoshi123/virtual-reality-experiences"
+    # --- CONFIGURACIÓN DE RUTAS ---
     
-    #la carpeta donde caeran los datos
+    # ⚠️ REEMPLAZA 'tu_archivo.csv' por el nombre real de tu archivo con su extensión .csv
+    nombre_del_csv = "02_bank.csv" 
+    
+    # Tu ruta exacta combinada con el nombre del archivo
+    ruta_csv_origen = os.path.join(r"C:\Users\ssvic\OneDrive\Escritorio\Evaluacion gestion-Ia\DataSets", nombre_del_csv)
+    
+    # La carpeta dentro de tu proyecto donde caerán los datos (../data/raw)
     carpeta_crudos = os.path.join(os.path.dirname(__file__), '..', 'data', 'raw')
     
-    ingerir_desde_kaggle(dataset_kaggle, carpeta_crudos)
+    # Ejecutar la función
+    ingerir_desde_local(ruta_csv_origen, carpeta_crudos)

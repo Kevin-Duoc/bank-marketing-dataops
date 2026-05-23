@@ -1,0 +1,3 @@
+column,failure_case,index,schema_context,check,check_number
+balance,int64,,Column,dtype('float64'),
+duration,int64,,Column,dtype('float64'),

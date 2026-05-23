@@ -1,75 +1,11 @@
-2026-04-23 17:19:40,965 - INFO - Conectando a Kaggle para descargar: aakashjoshi123/virtual-reality-experiences
-2026-04-23 17:19:42,293 - INFO - Ingesta exitosa. Archivos guardados en c:\Users\VI-Alumno\Downloads\PIPELINE-VR\src\..\data\raw
-2026-04-23 17:39:02,739 - INFO - Iniciando la limpieza de datos de Realidad Virtual
-2026-04-23 17:39:02,747 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Downloads\PIPELINE-VR\src\..\data\processed\vr_clean.csv
-2026-04-29 13:58:35,536 - INFO - Iniciando la limpieza de datos de Realidad Virtual
-2026-04-29 13:58:35,544 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Gestion-datos-IA\Gestion-datos-IA\src\..\data\processed\vr_clean.csv
-2026-04-29 14:00:51,709 - INFO - Conectando a Kaggle para descargar: aakashjoshi123/virtual-reality-experiences
-2026-04-29 14:00:53,218 - INFO - Ingesta exitosa. Archivos guardados en c:\Users\VI-Alumno\Gestion-datos-IA\Gestion-datos-IA\src\..\data\raw
-2026-04-29 14:02:09,311 - INFO - Iniciando la limpieza de datos de Realidad Virtual
-2026-04-29 14:02:09,319 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Gestion-datos-IA\Gestion-datos-IA\src\..\data\processed\vr_clean.csv
-2026-04-29 14:02:10,696 - INFO - Iniciando la limpieza de datos de Realidad Virtual
-2026-04-29 14:02:10,703 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Gestion-datos-IA\Gestion-datos-IA\src\..\data\processed\vr_clean.csv
-2026-04-29 14:16:27,509 - INFO - Iniciando validación con PANDERA...
-2026-04-29 14:16:27,527 - INFO - \u2705 Validación terminada. Válidos: 1000 | Errores detectados: 0
-2026-04-29 14:21:47,785 - INFO - Iniciando validación con PANDERA...
-2026-04-29 14:21:47,801 - INFO - Validación terminada. Válidos: 1000 | Errores detectados: 0
-2026-04-29 14:26:41,934 - INFO - Iniciando validación con PANDERA...
-2026-04-29 14:26:41,957 - INFO - Validación terminada. Válidos: 1000 | Errores detectados: 0
-2026-05-06 14:09:16,663 - INFO - Conectando a Kaggle para descargar: aakashjoshi123/virtual-reality-experiences
-2026-05-06 14:09:18,115 - INFO - Ingesta exitosa. Archivos guardados en c:\Users\VI-Alumno\Gestion-datos-IA\src\..\data\raw
-2026-05-06 14:10:53,338 - INFO - Iniciando la limpieza de datos de Realidad Virtual
-2026-05-06 14:10:53,347 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Gestion-datos-IA\src\..\data\processed\vr_clean.csv
-2026-05-06 14:11:59,953 - INFO - Iniciando validacion con PANDERA...
-2026-05-06 14:11:59,970 - INFO - Validacion terminada. Válidos: 1000 | Errores detectados: 0
-2026-05-06 14:25:40,455 - INFO - Iniciando fase de CARGA a MySQL...
-2026-05-06 14:25:40,580 - INFO - package: mysql.connector.plugins
-2026-05-06 14:25:40,581 - INFO - plugin_name: caching_sha2_password
-2026-05-06 14:25:40,581 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
-2026-05-06 14:25:40,584 - ERROR - Error crítico en la carga: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
-2026-05-06 14:27:18,367 - INFO - Iniciando fase de CARGA a MySQL...
-2026-05-06 14:27:18,434 - INFO - package: mysql.connector.plugins
-2026-05-06 14:27:18,434 - INFO - plugin_name: caching_sha2_password
-2026-05-06 14:27:18,434 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
-2026-05-06 14:27:18,435 - ERROR - Error crítico en la carga: 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
-2026-05-06 14:27:34,348 - INFO - Iniciando fase de CARGA a MySQL...
-2026-05-06 14:27:34,413 - INFO - package: mysql.connector.plugins
-2026-05-06 14:27:34,413 - INFO - plugin_name: caching_sha2_password
-2026-05-06 14:27:34,413 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
-2026-05-06 14:27:34,414 - ERROR - Error crítico en la carga: 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
-2026-05-06 14:29:02,309 - INFO - Iniciando fase de CARGA a MySQL...
-2026-05-06 14:29:02,380 - INFO - package: mysql.connector.plugins
-2026-05-06 14:29:02,380 - INFO - plugin_name: caching_sha2_password
-2026-05-06 14:29:02,380 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
-2026-05-06 14:29:02,382 - ERROR - Error crítico en la carga: 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
-2026-05-06 14:29:34,343 - INFO - Iniciando fase de CARGA a MySQL...
-2026-05-06 14:29:34,416 - INFO - package: mysql.connector.plugins
-2026-05-06 14:29:34,416 - INFO - plugin_name: caching_sha2_password
-2026-05-06 14:29:34,416 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
-2026-05-06 14:29:34,441 - INFO - Tabla 'usuarios_vr' creada o reiniciada con éxito.
-2026-05-06 14:29:34,445 - ERROR - Error crítico en la carga: Not all parameters were used in the SQL statement
-2026-05-06 14:29:34,446 - INFO - Conexión a MySQL cerrada.
-2026-05-06 14:31:12,533 - INFO - Iniciando fase de CARGA a MySQL...
-2026-05-06 14:31:12,611 - INFO - package: mysql.connector.plugins
-2026-05-06 14:31:12,611 - INFO - plugin_name: caching_sha2_password
-2026-05-06 14:31:12,611 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
-2026-05-06 14:31:12,653 - INFO - Tabla 'usuarios_vr' creada o reiniciada con éxito.
-2026-05-06 14:31:12,657 - ERROR - Error crítico en la carga: Not all parameters were used in the SQL statement
-2026-05-06 14:31:12,657 - INFO - Conexión a MySQL cerrada.
-2026-05-06 14:33:34,257 - INFO - Iniciando fase de CARGA a MySQL...
-2026-05-06 14:33:34,328 - INFO - package: mysql.connector.plugins
-2026-05-06 14:33:34,328 - INFO - plugin_name: caching_sha2_password
-2026-05-06 14:33:34,328 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
-2026-05-06 14:33:34,363 - INFO - Tabla 'usuarios_vr' creada o reiniciada con éxito.
-2026-05-06 14:33:34,396 - INFO - CARGA EXITOSA: Se insertaron 1000 registros en MySQL.
-2026-05-06 14:33:34,397 - INFO - Conexión a MySQL cerrada.
-2026-05-07 18:29:17,861 - INFO - Conectando a Kaggle para descargar: aakashjoshi123/virtual-reality-experiences
-2026-05-07 18:29:19,319 - INFO - Ingesta exitosa. Archivos guardados en c:\Users\VI-Alumno\Gestion-datos-IA\src\..\data\raw
-2026-05-07 18:29:44,201 - INFO - Iniciando la limpieza de datos de Realidad Virtual
-2026-05-07 18:29:44,210 - INFO - Limpieza exitosa. Archivo guardado en c:\Users\VI-Alumno\Gestion-datos-IA\src\..\data\processed\vr_clean.csv
-2026-05-07 18:30:34,461 - ERROR - ERROR CRITICO: Falta instalar una libreria. Ejecuta 'pip install pandas pandera'. Detalle: No module named 'pandera'
-2026-05-07 18:31:01,068 - INFO - Iniciando validacion con PANDERA...
-2026-05-07 18:31:01,085 - INFO - Validacion terminada. Validos: 1000 | Errores detectados: 0
-2026-05-07 18:31:06,845 - ERROR - ERROR CRITICO: Falta instalar una libreria. Ejecuta 'pip install pandas mysql-connector-python'. Detalle: No module named 'mysql'
-2026-05-07 18:31:51,060 - INFO - Iniciando fase de CARGA a MySQL...
-2026-05-07 18:31:51,068 - ERROR - Error critico en la carga: Authentication plugin 'caching_sha2_password' is not supported
+2026-05-22 22:09:18,438 - INFO - Iniciando ingesta desde ruta local: C:\Users\ssvic\OneDrive\Escritorio\Evaluacion gestion-Ia\DataSets\02_bank.csv
+2026-05-22 22:09:18,440 - INFO - Ingesta exitosa. Archivo copiado a c:\Users\ssvic\Gestion-datos-IA\src\..\data\raw\02_bank.csv
+2026-05-22 22:09:24,085 - INFO - Iniciando la limpieza de datos bancarios (02_bank)
+2026-05-22 22:09:24,119 - INFO - Se eliminaron 0 filas duplicadas.
+2026-05-22 22:09:24,200 - INFO - KPI - Tasa de Completitud y Preservacion de Datos: 100.00% (Registros finales: 11162 de 11162)
+2026-05-22 22:09:24,200 - INFO - Limpieza exitosa. Archivo procesado guardado en c:\Users\ssvic\Gestion-datos-IA\src\..\data\processed\bank_clean.csv
+2026-05-22 22:09:26,991 - INFO - Iniciando validacion con PANDERA en datos bancarios...
+2026-05-22 22:09:27,100 - INFO - KPI - Tasa de Fallas en Contratos de Datos: 0.00%
+2026-05-22 22:09:27,100 - INFO - Validacion terminada. Validos: 11162 | Filas con errores: 0
+2026-05-22 22:09:29,706 - INFO - Iniciando fase de CARGA a MySQL remoto en AWS...
+2026-05-22 22:09:50,736 - ERROR - Error al conectarse con la instancia EC2. El error tecnico es: 2003 (HY000): Can't connect to MySQL server on '44.204.208.68:3306' (10060)
