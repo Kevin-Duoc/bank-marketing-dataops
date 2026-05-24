@@ -2,17 +2,20 @@ import os
 import sys
 import logging
 
-# Inyeccion de la ruta de src al sistema para poder importar los modulos locales
+#inyeccion de la ruta de src al sistema para importar modulos locales
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
-# Importacion de las funciones de tus scripts del src
+#importacion de las 4 fases del src
 from ingesta import extraer_datos
 from limpieza import limpiar_datos
 from validacion import validar_datos
+from carga import cargar_datos
 
-# Configuracion del Logging nativo en el archivo central
+#configuracion del logging nativo
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOG_FILE = os.path.join(BASE_DIR, 'pipeline.log')
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+os.makedirs(LOG_DIR, exist_ok=True)
+LOG_FILE = os.path.join(LOG_DIR, 'pipeline.log')
 
 logging.basicConfig(
     filename=LOG_FILE,
@@ -22,32 +25,33 @@ logging.basicConfig(
 
 def ejecutar_pipeline():
     try:
-        print("\n=== INICIANDO PRUEBA DE INTEGRACION DATAOPS ===")
-        logging.info("=== CONFIGURACION DE PRUEBA INCREMENTAL ===")
+        print("\n=== INICIANDO PIPELINE DATAOPS (PRODUCCION) ===")
+        logging.info("=== INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---")
         
-        # 1. Definicion de la ruta fisica del CSV en la carpeta data/
         DATA_PATH = os.path.join(BASE_DIR, 'data', '02_bank.csv')
         
-        # FASE 1: INGESTA (Extraccion)
+        #fase 1: ingesta
         print("[+] Ejecutando Fase 1: Ingesta de datos...")
         df_bruto = extraer_datos(DATA_PATH)
         
-        # FASE 2: LIMPIEZA (Transformacion)
+        #fase 2: limpieza
         print("[+] Ejecutando Fase 2: Limpieza defensiva...")
         df_limpio = limpiar_datos(df_bruto)
         
-        # FASE 3: VALIDACION (Contrato de Datos con Pandera)
+        #fase 3: validacion
         print("[+] Ejecutando Fase 3: Validacion estricta de esquema...")
         df_validado = validar_datos(df_limpio)
         
-        # Fin de la prueba en memoria RAM
-        print("\n=== PRUEBA FINALIZADA CON EXITO ===")
-        print(f"Resultado en memoria RAM: {len(df_validado)} filas validadas y listas para AWS.")
-        logging.info(f"Integracion local exitosa. Dataset listo para carga. Filas: {len(df_validado)}")
+        # FASE 4: CARGA (Nueva fase integrada)
+        print("[+] Ejecutando Fase 4: Carga masiva en AWS EC2 MySQL...")
+        cargar_datos(df_validado)
+        
+        print("\n=== PIPELINE PROCESADO Y CARGADO CON EXITO ===")
+        logging.info("Ejecucion del pipeline completo finalizada sin anomalias.")
 
     except Exception as e:
-        print(f"\n[!] EL PIPELINE HA FALLADO: Revisa pipeline.log para ver los detalles del error.")
-        logging.error(f"Falla en la ejecucion del pipeline: {e}")
+        print(f"\n[!] CRITICAL ERROR: El pipeline ha fallado. Verifica pipeline.log.")
+        logging.error(f"Falla global en el orquestador main.py: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
