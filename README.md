@@ -10,7 +10,7 @@ El sistema está dividido en dos componentes independientes y desacoplados:
 ## 2. Tecnologías Utilizadas
 * **Lenguaje:** Python 3.12
 * **Procesamiento y Validación:** Pandas, Pandera, NumPy
-* **Infraestructura y Nube:** AWS RDS (Instancia MySQL), AWS EC2
+* **Infraestructura y Nube:** AWS EC2 (Instancia Linux con servidor MySQL)
 * **Base de Datos y ORM:** SQLAlchemy, PyMySQL
 * **Visualización:** Streamlit
 * **Contenedores y Despliegue:** Docker, Docker Hub
