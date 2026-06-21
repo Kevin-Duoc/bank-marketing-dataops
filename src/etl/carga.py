@@ -39,7 +39,8 @@ def cargar_datos(df):
         logging.info(f"Conectando a base de datos '{DB}' en servidor remoto de AWS...")
         
         #carga masiva de datos mediante Pandas a SQL
-        df.to_sql(name='clientes_marketing', con=engine, if_exists='replace', index=False)
+        #actualizacion: cambie if_exists='replace' a if_exists='append' ya que al subir por lotes a la base de datos, el segundo lote sobreescribiria el primero
+        df.to_sql(name='clientes_marketing', con=engine, if_exists='append', index=False)
         
         filas_cargadas = len(df)
         logging.info(f"Carga exitosa. {filas_cargadas} registros inyectados en la tabla 'clientes_marketing'.")

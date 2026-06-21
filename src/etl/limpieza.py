@@ -19,6 +19,9 @@ def limpiar_datos(df):
     """
     try:
         logging.info("Fase 2: Iniciando proceso de limpieza y transformacion...")
+
+        #agregado: para guardar la cantidad inicial para calcular el KPI de perdida
+        filas_originales = len(df)
         
         #1 detectar y eliminar duplicados
         duplicados_antes = df.duplicated().sum()
@@ -41,7 +44,16 @@ def limpiar_datos(df):
         #registro del KPI de salida en el log
         filas, columnas = df.shape
         logging.info(f"Limpieza finalizada exitosamente. Volumen limpio en RAM: {filas} filas.")
-        
+
+        #3 Alera KPI critica
+        filas_eliminadas = filas_originales - filas
+        porcentaje_perdida = (filas_eliminadas / filas_originales) * 100 if filas_originales > 0 else 0
+
+        if porcentaje_perdida >= 5.0:
+            logging.critical(f"ALERTA KPI: Se eliminó el {porcentaje_perdida:.2f}% de los datos. Revisar calidad de origen.")
+        else:
+            logging.info(f"KPI Saludable: Integridad de datos al {100 - porcentaje_perdida:.2f}%.")
+ 
         return df
 
     except Exception as e:

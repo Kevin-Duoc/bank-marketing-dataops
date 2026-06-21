@@ -28,3 +28,70 @@
 2026-05-23 22:33:16,142 - INFO - Carga exitosa. 11162 registros inyectados en la tabla 'clientes_marketing'.
 2026-05-23 22:33:16,142 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
 2026-05-23 22:33:16,143 - INFO - Ejecucion del pipeline completo finalizada sin anomalias.
+2026-05-28 01:02:50,201 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-05-28 01:02:50,201 - INFO - --- INICIANDO PIPELINE DATAOPS ---
+2026-05-28 01:02:50,201 - INFO - Fase 1: Iniciando extraccion de datos (Pandas)...
+2026-05-28 01:02:50,239 - INFO - Ingesta exitosa. Volumen ingerido: 11162 filas y 17 columnas.
+2026-05-28 01:02:50,239 - INFO - Fase 2: Iniciando proceso de limpieza y transformacion...
+2026-05-28 01:02:50,249 - INFO - Limpieza: No se detectaron registros duplicados en el dataset.
+2026-05-28 01:02:50,252 - INFO - Limpieza: Cero valores nulos detectados. Calidad de celdas estricta aprobada.
+2026-05-28 01:02:50,252 - INFO - Limpieza finalizada exitosamente. Volumen limpio en RAM: 11162 filas.
+2026-05-28 01:02:50,252 - INFO - Fase 3: Iniciando validacion de Contratos de Datos (Pandera)...
+2026-05-28 01:02:50,320 - INFO - Validacion exitosa: Todos los registros cumplen con el contrato de calidad.
+2026-05-28 01:02:50,320 - INFO - Fase 4: Iniciando conexion TCP hacia AWS MySQL...
+2026-05-28 01:02:50,350 - INFO - Conectando a base de datos 'bank_marketing' en servidor remoto de AWS...
+2026-05-28 01:02:55,005 - INFO - Carga exitosa. 11162 registros inyectados en la tabla 'clientes_marketing'.
+2026-05-28 01:02:55,006 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
+2026-05-28 01:02:55,006 - INFO - Ejecucion del pipeline completo finalizada sin anomalias.
+2026-06-21 02:40:31,949 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-06-21 02:40:31,950 - INFO - --- INICIANDO PIPELINE DATAOPS ---
+2026-06-21 02:40:31,951 - INFO - Fase 1: Iniciando extraccion de datos (Pandas)...
+2026-06-21 02:40:31,987 - INFO - Ingesta exitosa. Volumen ingerido: 11162 filas y 17 columnas.
+2026-06-21 02:40:31,987 - INFO - Fase 2: Iniciando proceso de limpieza y transformacion...
+2026-06-21 02:40:31,994 - INFO - Limpieza: No se detectaron registros duplicados en el dataset.
+2026-06-21 02:40:31,997 - INFO - Limpieza: Cero valores nulos detectados. Calidad de celdas estricta aprobada.
+2026-06-21 02:40:31,998 - INFO - Limpieza finalizada exitosamente. Volumen limpio en RAM: 11162 filas.
+2026-06-21 02:40:31,998 - INFO - Fase 3: Iniciando validacion de Contratos de Datos (Pandera)...
+2026-06-21 02:40:32,066 - INFO - Validacion exitosa: Todos los registros cumplen con el contrato de calidad.
+2026-06-21 02:40:32,067 - INFO - Fase 4: Iniciando conexion TCP hacia AWS MySQL...
+2026-06-21 02:40:32,138 - INFO - Conectando a base de datos 'bank_marketing' en servidor remoto de AWS...
+2026-06-21 02:40:36,614 - INFO - Carga exitosa. 11162 registros inyectados en la tabla 'clientes_marketing'.
+2026-06-21 02:40:36,614 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
+2026-06-21 02:40:36,615 - INFO - Ejecucion del pipeline completo finalizada sin anomalias.
+2026-06-21 00:23:33,739 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-06-21 00:23:35,988 - INFO - --- INICIANDO PIPELINE DATAOPS ---
+2026-06-21 00:23:35,988 - INFO - Fase 1: Iniciando extraccion de datos (Pandas)...
+2026-06-21 00:23:35,988 - ERROR - Falla en Ingesta: read_csv() got an unexpected keyword argument 'chucksize'
+2026-06-21 00:27:03,946 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-06-21 00:27:06,043 - ERROR - Falla global en el orquestador main.py: extraer_datos() got an unexpected keyword argument 'chuck_size'
+2026-06-21 00:28:08,830 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-06-21 00:28:10,854 - ERROR - Falla global en el orquestador main.py: extraer_datos() got an unexpected keyword argument 'chuck_size'
+2026-06-21 00:29:22,073 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-06-21 00:29:24,074 - ERROR - Falla global en el orquestador main.py: extraer_datos() got an unexpected keyword argument 'chuck_size'
+2026-06-21 00:30:19,851 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-06-21 00:30:21,877 - INFO - --- INICIANDO PIPELINE DATAOPS ---
+2026-06-21 00:30:21,878 - INFO - Fase 1: Iniciando extraccion de datos (Pandas)...
+2026-06-21 00:30:21,883 - INFO - Ingesta configurada exitosamente por lotes de 10000 registros.
+2026-06-21 00:30:21,897 - INFO - Fase 2: Iniciando proceso de limpieza y transformacion...
+2026-06-21 00:30:21,909 - INFO - Limpieza: No se detectaron registros duplicados en el dataset.
+2026-06-21 00:30:21,913 - INFO - Limpieza: Cero valores nulos detectados. Calidad de celdas estricta aprobada.
+2026-06-21 00:30:21,913 - INFO - Limpieza finalizada exitosamente. Volumen limpio en RAM: 10000 filas.
+2026-06-21 00:30:21,913 - INFO - KPI Saludable: Integridad de datos al 100.00%.
+2026-06-21 00:30:21,913 - INFO - Fase 3: Iniciando validacion de Contratos de Datos (Pandera)...
+2026-06-21 00:30:21,984 - INFO - Validacion exitosa: Todos los registros cumplen con el contrato de calidad.
+2026-06-21 00:30:21,984 - INFO - Fase 4: Iniciando conexion TCP hacia AWS MySQL...
+2026-06-21 00:30:21,985 - INFO - Conectando a base de datos 'bank_marketing' en servidor remoto de AWS...
+2026-06-21 00:30:25,529 - INFO - Carga exitosa. 10000 registros inyectados en la tabla 'clientes_marketing'.
+2026-06-21 00:30:25,530 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
+2026-06-21 00:30:25,533 - INFO - Fase 2: Iniciando proceso de limpieza y transformacion...
+2026-06-21 00:30:25,535 - INFO - Limpieza: No se detectaron registros duplicados en el dataset.
+2026-06-21 00:30:25,535 - INFO - Limpieza: Cero valores nulos detectados. Calidad de celdas estricta aprobada.
+2026-06-21 00:30:25,535 - INFO - Limpieza finalizada exitosamente. Volumen limpio en RAM: 1162 filas.
+2026-06-21 00:30:25,535 - INFO - KPI Saludable: Integridad de datos al 100.00%.
+2026-06-21 00:30:25,536 - INFO - Fase 3: Iniciando validacion de Contratos de Datos (Pandera)...
+2026-06-21 00:30:25,577 - INFO - Validacion exitosa: Todos los registros cumplen con el contrato de calidad.
+2026-06-21 00:30:25,577 - INFO - Fase 4: Iniciando conexion TCP hacia AWS MySQL...
+2026-06-21 00:30:25,577 - INFO - Conectando a base de datos 'bank_marketing' en servidor remoto de AWS...
+2026-06-21 00:30:28,003 - INFO - Carga exitosa. 1162 registros inyectados en la tabla 'clientes_marketing'.
+2026-06-21 00:30:28,003 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
+2026-06-21 00:30:28,003 - INFO - Ejecucion del pipeline completo finalizada sin anomalias.
