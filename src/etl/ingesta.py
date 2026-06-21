@@ -5,16 +5,17 @@ import os
 
 #Configuración de logging nativo
 #crea el archivo pipeline.log automáticamente en la raíz
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOG_DIR = os.path.join(BASE_DIR, 'logs')
-os.makedirs(LOG_DIR, exist_ok=True)
-LOG_FILE = os.path.join(LOG_DIR, 'pipeline.log')
+##ya no es necesario debido a la ruta /src/etc
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# LOG_DIR = os.path.join(BASE_DIR, 'logs')
+# os.makedirs(LOG_DIR, exist_ok=True)
+# LOG_FILE = os.path.join(LOG_DIR, 'pipeline.log')
 
-logging.basicConfig(
-    filename=LOG_FILE,
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+# logging.basicConfig(
+#     filename=LOG_FILE,
+#     level=logging.INFO,
+#     format='%(asctime)s - %(levelname)s - %(message)s'
+# )
 
 def extraer_datos(ruta_archivo, chunk_size=10000): #por lotes
     try:
@@ -42,6 +43,8 @@ def extraer_datos(ruta_archivo, chunk_size=10000): #por lotes
         sys.exit(1)
 
 if __name__ == "__main__":
+    # Como el archivo ahora está en src/etl/, subimos 3 niveles para llegar a la raíz.
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     #apunta a la carpeta data/02_bank.csv
     DATA_PATH = os.path.join(BASE_DIR, 'data', '02_bank.csv')
     

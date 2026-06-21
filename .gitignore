@@ -3,7 +3,7 @@ venv/
 env/
 
 #archivos compilados de Python
-__pycache__/
+/__pycache__/
 *.pyc
 
 #claves o credenciales (Seguridad de AWS)

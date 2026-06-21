@@ -4,16 +4,17 @@ import os
 from dotenv import load_dotenv  #carga la librería para leer el archivo .env
 
 #configuración de rutas para los Logs
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOG_DIR = os.path.join(BASE_DIR, 'logs')
-os.makedirs(LOG_DIR, exist_ok=True)
-LOG_FILE = os.path.join(LOG_DIR, 'pipeline.log')
+##ya no es necesario debido a la ruta /src/etc
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# LOG_DIR = os.path.join(BASE_DIR, 'logs')
+# os.makedirs(LOG_DIR, exist_ok=True)
+# LOG_FILE = os.path.join(LOG_DIR, 'pipeline.log')
 
-logging.basicConfig(
-    filename=LOG_FILE,
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+# logging.basicConfig(
+#     filename=LOG_FILE,
+#     level=logging.INFO,
+#     format='%(asctime)s - %(levelname)s - %(message)s'
+# )
 
 #cargar las variables de entorno del archivo .env automáticamente
 load_dotenv()

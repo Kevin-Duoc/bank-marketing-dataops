@@ -95,3 +95,60 @@
 2026-06-21 00:30:28,003 - INFO - Carga exitosa. 1162 registros inyectados en la tabla 'clientes_marketing'.
 2026-06-21 00:30:28,003 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
 2026-06-21 00:30:28,003 - INFO - Ejecucion del pipeline completo finalizada sin anomalias.
+2026-06-21 18:39:55,384 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-06-21 18:39:57,984 - INFO - --- INICIANDO PIPELINE DATAOPS ---
+2026-06-21 18:39:57,984 - INFO - Fase 1: Iniciando extraccion de datos (Pandas)...
+2026-06-21 18:39:57,997 - INFO - Ingesta configurada exitosamente por lotes de 10000 registros.
+2026-06-21 18:39:58,011 - INFO - Fase 2: Iniciando proceso de limpieza y transformacion...
+2026-06-21 18:39:58,025 - INFO - Limpieza: No se detectaron registros duplicados en el dataset.
+2026-06-21 18:39:58,028 - INFO - Limpieza: Cero valores nulos detectados. Calidad de celdas estricta aprobada.
+2026-06-21 18:39:58,028 - INFO - Limpieza finalizada exitosamente. Volumen limpio en RAM: 10000 filas.
+2026-06-21 18:39:58,028 - INFO - KPI Saludable: Integridad de datos al 100.00%.
+2026-06-21 18:39:58,028 - INFO - Fase 3: Iniciando validacion de Contratos de Datos (Pandera)...
+2026-06-21 18:39:58,097 - INFO - Validacion exitosa: Todos los registros cumplen con el contrato de calidad.
+2026-06-21 18:39:58,097 - INFO - Fase 4: Iniciando conexion TCP hacia AWS MySQL...
+2026-06-21 18:39:58,097 - INFO - Conectando a base de datos 'bank_marketing' en servidor remoto de AWS...
+2026-06-21 18:40:01,660 - INFO - Carga exitosa. 10000 registros inyectados en la tabla 'clientes_marketing'.
+2026-06-21 18:40:01,660 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
+2026-06-21 18:40:01,664 - INFO - Fase 2: Iniciando proceso de limpieza y transformacion...
+2026-06-21 18:40:01,666 - INFO - Limpieza: No se detectaron registros duplicados en el dataset.
+2026-06-21 18:40:01,666 - INFO - Limpieza: Cero valores nulos detectados. Calidad de celdas estricta aprobada.
+2026-06-21 18:40:01,666 - INFO - Limpieza finalizada exitosamente. Volumen limpio en RAM: 1162 filas.
+2026-06-21 18:40:01,666 - INFO - KPI Saludable: Integridad de datos al 100.00%.
+2026-06-21 18:40:01,666 - INFO - Fase 3: Iniciando validacion de Contratos de Datos (Pandera)...
+2026-06-21 18:40:01,709 - INFO - Validacion exitosa: Todos los registros cumplen con el contrato de calidad.
+2026-06-21 18:40:01,709 - INFO - Fase 4: Iniciando conexion TCP hacia AWS MySQL...
+2026-06-21 18:40:01,709 - INFO - Conectando a base de datos 'bank_marketing' en servidor remoto de AWS...
+2026-06-21 18:40:04,194 - INFO - Carga exitosa. 1162 registros inyectados en la tabla 'clientes_marketing'.
+2026-06-21 18:40:04,194 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
+2026-06-21 18:40:04,194 - INFO - Ejecucion del pipeline completo finalizada sin anomalias.
+2026-06-21 18:40:49,157 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-06-21 18:40:59,223 - ERROR - Falla global en el orquestador main.py: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '13.216.67.25' (timed out)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-21 18:43:38,289 - INFO - === INICIANDO EJECUCION INTEGRAL DEL PIPELINE ---
+2026-06-21 18:43:40,734 - INFO - --- INICIANDO PIPELINE DATAOPS ---
+2026-06-21 18:43:40,734 - INFO - Fase 1: Iniciando extraccion de datos (Pandas)...
+2026-06-21 18:43:40,737 - INFO - Ingesta configurada exitosamente por lotes de 10000 registros.
+2026-06-21 18:43:40,749 - INFO - Fase 2: Iniciando proceso de limpieza y transformacion...
+2026-06-21 18:43:40,755 - INFO - Limpieza: No se detectaron registros duplicados en el dataset.
+2026-06-21 18:43:40,759 - INFO - Limpieza: Cero valores nulos detectados. Calidad de celdas estricta aprobada.
+2026-06-21 18:43:40,759 - INFO - Limpieza finalizada exitosamente. Volumen limpio en RAM: 10000 filas.
+2026-06-21 18:43:40,759 - INFO - KPI Saludable: Integridad de datos al 100.00%.
+2026-06-21 18:43:40,759 - INFO - Fase 3: Iniciando validacion de Contratos de Datos (Pandera)...
+2026-06-21 18:43:40,828 - INFO - Validacion exitosa: Todos los registros cumplen con el contrato de calidad.
+2026-06-21 18:43:40,828 - INFO - Fase 4: Iniciando conexion TCP hacia AWS MySQL...
+2026-06-21 18:43:40,828 - INFO - Conectando a base de datos 'bank_marketing' en servidor remoto de AWS...
+2026-06-21 18:43:44,428 - INFO - Carga exitosa. 10000 registros inyectados en la tabla 'clientes_marketing'.
+2026-06-21 18:43:44,428 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
+2026-06-21 18:43:44,432 - INFO - Fase 2: Iniciando proceso de limpieza y transformacion...
+2026-06-21 18:43:44,433 - INFO - Limpieza: No se detectaron registros duplicados en el dataset.
+2026-06-21 18:43:44,434 - INFO - Limpieza: Cero valores nulos detectados. Calidad de celdas estricta aprobada.
+2026-06-21 18:43:44,434 - INFO - Limpieza finalizada exitosamente. Volumen limpio en RAM: 1162 filas.
+2026-06-21 18:43:44,434 - INFO - KPI Saludable: Integridad de datos al 100.00%.
+2026-06-21 18:43:44,434 - INFO - Fase 3: Iniciando validacion de Contratos de Datos (Pandera)...
+2026-06-21 18:43:44,475 - INFO - Validacion exitosa: Todos los registros cumplen con el contrato de calidad.
+2026-06-21 18:43:44,475 - INFO - Fase 4: Iniciando conexion TCP hacia AWS MySQL...
+2026-06-21 18:43:44,476 - INFO - Conectando a base de datos 'bank_marketing' en servidor remoto de AWS...
+2026-06-21 18:43:46,949 - INFO - Carga exitosa. 1162 registros inyectados en la tabla 'clientes_marketing'.
+2026-06-21 18:43:46,949 - INFO - --- PIPELINE DATAOPS FINALIZADO CON EXITO ---
+2026-06-21 18:43:46,949 - INFO - Ejecucion del pipeline completo finalizada sin anomalias.
