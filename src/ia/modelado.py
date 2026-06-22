@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 
-# aeguramos que Python sepa buscar en esta misma carpeta (src/ia/)
+#aeguramos que Python sepa buscar en esta misma carpeta (src/ia/)
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from monitoreo import medir_recursos
@@ -44,7 +44,7 @@ def preparar_datos(df):
     """
     print("\n[+] 2. Preparando datos (Traduciendo palabras a matemáticas)...")
     
-    #separa la variable que queremos predecir ('deposit')
+    #separa la variable que se quiere predecir ('deposit')
     y = df['deposit'].map({'yes': 1, 'no': 0})
     X = df.drop('deposit', axis=1)
     
@@ -58,7 +58,7 @@ def preparar_datos(df):
     print(f"  -> Datos de Examen (Test): {X_test.shape[0]} filas")
     return X_train, X_test, y_train, y_test
 
-# --- LOS MODELOS DE INTELIGENCIA ARTIFICIAL ---
+#MODELOS DE INTELIGENCIA ARTIFICIAL
 @medir_recursos
 def entrenar_regresion_logistica(X_train, y_train, X_test, y_test):
     print("\n[+] 3. Entrenando Modelo 1: Regresión Logística (Básico)...")
@@ -67,25 +67,26 @@ def entrenar_regresion_logistica(X_train, y_train, X_test, y_test):
     
     #el modelo rinde el examen
     predicciones = modelo.predict(X_test)
+    #extraemos la probabilidad (porcentaje de seguridad)
+    predicciones_proba = modelo.predict_proba(X_test)[:, 1] 
     
-    #el juez evalúa las respuestas
-    ##evaluar_modelo(y_test, predicciones, "Regresión Logística")
-    return evaluar_modelo(y_test, predicciones, "Regresión Logística")
+    #el juez evalúa las respuestas (ahora le pasamos 4 parámetros)
+    return evaluar_modelo(y_test, predicciones, predicciones_proba, "Regresión Logística")
 
 @medir_recursos
 def entrenar_random_forest(X_train, y_train, X_test, y_test):
     print("\n[+] 4. Entrenando Modelo 2: Random Forest (Avanzado)...")
-    #crea un bosque de 100 árboles de decisión
+    #creamos un bosque de 100 árboles de decisión
     modelo = RandomForestClassifier(n_estimators=100, random_state=42)
     modelo.fit(X_train, y_train)
     
     #el modelo rinde el examen
     predicciones = modelo.predict(X_test)
+    #extraemos la probabilidad (porcentaje de seguridad)
+    predicciones_proba = modelo.predict_proba(X_test)[:, 1] 
     
-    #el juez evalúa las respuestas
-    ##evaluar_modelo(y_test, predicciones, "Random Forest")
-    return evaluar_modelo(y_test, predicciones, "Random Forest")
-
+    #el juez evalúa las respuestas (ahora le pasamos 4 parámetros)
+    return evaluar_modelo(y_test, predicciones, predicciones_proba, "Random Forest")
 if __name__ == "__main__":
     print("=== INICIANDO LABORATORIO DE IA DATAOPS ===")
     
