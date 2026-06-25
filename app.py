@@ -17,7 +17,13 @@ st.markdown("""
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     .block-container {padding-top: 2rem;}
-    [data-testid="stMetricValue"] {font-size: 2.5rem !important;}
+    
+    /* Hacer los números de las métricas principales mucho más grandes */
+    [data-testid="stMetricValue"] {font-size: 3.5rem !important; font-weight: bold;}
+    [data-testid="stMetricLabel"] {font-size: 1.5rem !important;}
+    
+    /* Agrandar los subtítulos de Streamlit */
+    h2, h3 {font-size: 2rem !important;}
     </style>
 """, unsafe_allow_html=True)
 
@@ -69,6 +75,9 @@ try:
     else:
         df = df_base
 
+    #configuración global para letras grandes en Plotly
+    plotly_font_config = dict(family="Arial", size=16, color="white")
+
     #vista 1: NEGOCIO Y EDA
     if menu == "Exploración de Datos (EDA)":
         st.title("Análisis Exploratorio de Datos (EDA)")
@@ -88,7 +97,7 @@ try:
             df_jobs = df['Profesión'].value_counts().reset_index()
             df_jobs.columns = ['Profesión', 'Cantidad']
             fig_job = px.bar(df_jobs, x='Cantidad', y='Profesión', orientation='h', title="Distribución por Profesión")
-            fig_job.update_layout(yaxis={'categoryorder':'total ascending'})
+            fig_job.update_layout(yaxis={'categoryorder':'total ascending'}, font=plotly_font_config, title_font_size=22)
             st.plotly_chart(fig_job, use_container_width=True)
             
         with col_graf2:
@@ -96,7 +105,8 @@ try:
             df_dep.columns = ['Depósito', 'Cantidad']
             fig_dep = px.pie(df_dep, values='Cantidad', names='Depósito', hole=0.4, title="Suscripción a Depósito",
                              color='Depósito', color_discrete_map={'Sí': '#3b82f6', 'No': '#ef4444'})
-            fig_dep.update_traces(textinfo='label+percent') 
+            fig_dep.update_traces(textinfo='label+percent', textfont_size=18) 
+            fig_dep.update_layout(font=plotly_font_config, title_font_size=22)
             st.plotly_chart(fig_dep, use_container_width=True)
 
         st.divider()
@@ -107,6 +117,7 @@ try:
             fig_scatter = px.scatter(df, x="Edad", y="Saldo Cuenta", color="Depósito Aceptado", 
                                      title="Edad vs Saldo en Cuenta", opacity=0.6,
                                      color_discrete_map={'Sí': '#3b82f6', 'No': '#ef4444'})
+            fig_scatter.update_layout(font=plotly_font_config, title_font_size=22)
             st.plotly_chart(fig_scatter, use_container_width=True)
 
         with col_biv2:
@@ -114,6 +125,8 @@ try:
             matriz_corr = df_num.corr().round(2)
             fig_corr = px.imshow(matriz_corr, text_auto=True, aspect="auto", 
                                  title="Matriz de Correlación Lineal", color_continuous_scale='Blues')
+            fig_corr.update_traces(textfont_size=16) # Números grandes adentro
+            fig_corr.update_layout(font=plotly_font_config, title_font_size=22)
             st.plotly_chart(fig_corr, use_container_width=True)
 
         st.divider()
@@ -164,11 +177,45 @@ try:
             }
             df_vista.rename(columns=mapeo_cols, inplace=True)
             
-            for col in ['Exactitud', 'Precisión', 'Sensibilidad', 'F1-Score', 'Curva ROC (AUC)', 'Índice Gini']:
-                if col in df_vista.columns:
-                    df_vista[col] = (df_vista[col].astype(float) * 100).round(2).astype(str) + '%'
+            #transformar valores para visualización
+            df_vista_formateado = df_vista.copy()
+            for col in df_vista_formateado.columns:
+                df_vista_formateado[col] = df_vista_formateado[col].apply(
+                    lambda x: f"{float(str(x).replace('%', '')):,.2f}{'%' if '%' in str(x) else ''}"
+                )
             
-            st.dataframe(df_vista, use_container_width=True)
+            #tabla de datos
+            st.markdown("""
+            <style>
+            .tabla-final { 
+                width: 100%; 
+                border-collapse: collapse; 
+                color: #e0e0e0; 
+                font-size: 18px; 
+                font-family: sans-serif;
+            }
+            .tabla-final th { 
+                background-color: #2563eb; 
+                color: white;
+                padding: 12px 15px; 
+                text-align: center; 
+                font-weight: 600;
+            }
+            .tabla-final td { 
+                padding: 12px 15px; 
+                text-align: center; 
+                border-bottom: 1px solid #333; 
+            }
+            .tabla-final tr:nth-child(even) { background-color: #1a1a1a; }
+            .tabla-final tr:hover { background-color: #2d2d2d; }
+            </style>
+            """, unsafe_allow_html=True)
+
+            tabla_html = "<table class='tabla-final'><tr><th>Modelo</th><th>Exactitud</th><th>Precisión</th><th>Sensibilidad</th><th>F1-Score</th><th>AUC</th><th>Gini</th><th>RAM (MB)</th><th>Latencia (s)</th></tr>"
+            for nombre, metrica in metricas.items():
+                tabla_html += f"<tr><td><b>{nombre}</b></td><td>{metrica['accuracy']*100:.2f}%</td><td>{metrica['precision']*100:.2f}%</td><td>{metrica['recall']*100:.2f}%</td><td>{metrica['f1']*100:.2f}%</td><td>{metrica['auc']:.2f}</td><td>{metrica['gini']:.2f}</td><td>{metrica['ram_mb']:.2f}</td><td>{metrica['tiempo_s']:.4f}</td></tr>"
+            tabla_html += "</table>"
+            st.markdown(tabla_html, unsafe_allow_html=True)
             
             st.divider()
             st.subheader("Matrices de Confusión (Falsos Positivos/Negativos)")
@@ -179,11 +226,12 @@ try:
             if 'matriz_confusion' in metricas[modelos_keys[0]]:
                 with col_rf:
                     z1 = metricas[modelos_keys[1]]['matriz_confusion']
-                    #tema azul
                     fig_cm1 = px.imshow(z1, text_auto=True, aspect="auto", title=f"Matriz: {modelos_keys[1]}",
                                         labels=dict(x="Predicción de la IA", y="Realidad Histórica"),
                                         x=['No Depósito', 'Sí Depósito'], y=['No Depósito', 'Sí Depósito'],
                                         color_continuous_scale='Blues')
+                    fig_cm1.update_traces(textfont_size=24) 
+                    fig_cm1.update_layout(font=plotly_font_config, title_font_size=24)
                     st.plotly_chart(fig_cm1, use_container_width=True)
                 
                 with col_lr:
@@ -192,9 +240,48 @@ try:
                                         labels=dict(x="Predicción de la IA", y="Realidad Histórica"),
                                         x=['No Depósito', 'Sí Depósito'], y=['No Depósito', 'Sí Depósito'],
                                         color_continuous_scale='Teal')
+                    fig_cm2.update_traces(textfont_size=24) 
+                    fig_cm2.update_layout(font=plotly_font_config, title_font_size=24)
                     st.plotly_chart(fig_cm2, use_container_width=True)
 
             st.divider()
+            
+            #gráfico de curva roc
+            st.subheader("Curva ROC (Poder de Discriminación)")
+            fig_roc = go.Figure()
+            colores_roc = ['#008080', '#3b82f6']
+            
+            for i, m_name in enumerate(modelos_keys):
+                if 'roc_fpr' in metricas[m_name] and 'roc_tpr' in metricas[m_name]:
+                    fpr = metricas[m_name]['roc_fpr']
+                    tpr = metricas[m_name]['roc_tpr']
+                    auc_val = metricas[m_name].get('auc', 0)
+                    
+                    fig_roc.add_trace(go.Scatter(
+                        x=fpr, y=tpr, mode='lines', 
+                        name=f"{m_name} (AUC={auc_val:.2f})",
+                        line=dict(width=4, color=colores_roc[i % len(colores_roc)])
+                    ))
+            
+            #línea base
+            fig_roc.add_trace(go.Scatter(
+                x=[0, 1], y=[0, 1], mode='lines', 
+                name="Línea Aleatoria (Sin IA)", 
+                line=dict(dash='dash', color='gray', width=2)
+            ))
+            
+            fig_roc.update_layout(
+                xaxis_title="Tasa de Falsos Positivos (FPR)",
+                yaxis_title="Tasa de Verdaderos Positivos (TPR)",
+                font=plotly_font_config,
+                title_font_size=24,
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+                legend=dict(x=0.65, y=0.1, font=dict(size=18)),
+                xaxis=dict(gridcolor='rgba(255,255,255,0.1)'),
+                yaxis=dict(gridcolor='rgba(255,255,255,0.1)')
+            )
+            st.plotly_chart(fig_roc, use_container_width=True)
             
             #radar de 3 circulos
             st.subheader("Análisis de Trade-Off (Radar)")
@@ -208,27 +295,30 @@ try:
             df_radar = pd.DataFrame(radar_data)
             
             rad1, rad2, rad3 = st.columns(3)
-            # Layout base transparente
-            polar_layout = dict(bgcolor='rgba(0,0,0,0)', radialaxis=dict(visible=True, gridcolor='gray', tickfont=dict(color='white')))
+            polar_layout = dict(
+                bgcolor='rgba(0,0,0,0)', 
+                radialaxis=dict(visible=True, gridcolor='gray', tickfont=dict(color='white', size=14)),
+                angularaxis=dict(tickfont=dict(size=18, color='white'))
+            )
             
             with rad1:
                 df_lr = df_radar[df_radar['Modelo'] == modelos_keys[0]]
                 fig_r1 = px.line_polar(df_lr, r='Valor', theta='Métrica', line_close=True, title=modelos_keys[0])
                 fig_r1.update_traces(fill='toself', line_color='#008080')
-                fig_r1.update_layout(polar=polar_layout, paper_bgcolor='rgba(0,0,0,0)', font_color='white')
+                fig_r1.update_layout(polar=polar_layout, paper_bgcolor='rgba(0,0,0,0)', font=plotly_font_config, title_font_size=22)
                 st.plotly_chart(fig_r1, use_container_width=True)
                 
             with rad2:
                 fig_r2 = px.line_polar(df_radar, r='Valor', theta='Métrica', color='Modelo', line_close=True, title="Comparativa Global")
                 fig_r2.update_traces(fill='toself')
-                fig_r2.update_layout(polar=polar_layout, paper_bgcolor='rgba(0,0,0,0)', font_color='white', showlegend=False)
+                fig_r2.update_layout(polar=polar_layout, paper_bgcolor='rgba(0,0,0,0)', font=plotly_font_config, title_font_size=22, showlegend=False)
                 st.plotly_chart(fig_r2, use_container_width=True)
                 
             with rad3:
                 df_rf = df_radar[df_radar['Modelo'] == modelos_keys[1]]
                 fig_r3 = px.line_polar(df_rf, r='Valor', theta='Métrica', line_close=True, title=modelos_keys[1])
                 fig_r3.update_traces(fill='toself', line_color='#3b82f6')
-                fig_r3.update_layout(polar=polar_layout, paper_bgcolor='rgba(0,0,0,0)', font_color='white')
+                fig_r3.update_layout(polar=polar_layout, paper_bgcolor='rgba(0,0,0,0)', font=plotly_font_config, title_font_size=22)
                 st.plotly_chart(fig_r3, use_container_width=True)
             
         else:
@@ -238,7 +328,6 @@ try:
     elif menu == "Telemetría DataOps":
         st.title("Supervisión del Pipeline ETL y Auditoría")
         
-        #métricas visuales de respaldo 
         col_op1, col_op2 = st.columns(2)
         with col_op1:
             st.metric("Integridad de Filas (Limpieza)", "11,162 / 11,162", delta="0 Duplicados eliminados", delta_color="off")
@@ -259,7 +348,7 @@ try:
             logs_filtrados = [linea for linea in logs_completos if busqueda.lower() in linea.lower()]
             texto_final = "".join(logs_filtrados) if logs_filtrados else "No se encontraron resultados."
             
-            st.text_area("Registro Histórico del Sistema", texto_final, height=400)
+            st.markdown(f'<textarea style="width:100%; height:400px; font-size:1.2rem; background-color:#0E1117; color:white; border:none; padding:10px;">{texto_final}</textarea>', unsafe_allow_html=True)
 
 except Exception as e:
     st.error(f"Falla crítica en el sistema: {e}")

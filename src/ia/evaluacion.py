@@ -1,4 +1,4 @@
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_auc_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_auc_score, roc_curve
 
 def evaluar_modelo(y_real, y_pred, y_pred_proba, nombre_modelo):
     """
@@ -13,6 +13,7 @@ def evaluar_modelo(y_real, y_pred, y_pred_proba, nombre_modelo):
     cm = confusion_matrix(y_real, y_pred)
     auc = roc_auc_score(y_real, y_pred_proba)
     gini = (2 * auc) - 1  #fórmula matemática estándar para derivar Gini desde AUC
+    fpr, tpr, _ = roc_curve(y_real, y_pred_proba) #extrae coordenadas para dibujar la curva roc
     
     #reporte en consola
     print(f"\n[Resultados del Juez] - {nombre_modelo}")
@@ -32,5 +33,7 @@ def evaluar_modelo(y_real, y_pred, y_pred_proba, nombre_modelo):
         "f1": f1,
         "auc": auc,
         "gini": gini,
-        "matriz_confusion": cm.tolist()
+        "matriz_confusion": cm.tolist(),
+        "roc_fpr": fpr.tolist(), #eje X de la curva
+        "roc_tpr": tpr.tolist() #eje Y de la curva
     }

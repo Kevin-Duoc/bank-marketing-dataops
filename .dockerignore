@@ -1,7 +1,23 @@
+#entornos virtuales
 venv/
 env/
+.venv/
+
+#caché python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+#credenciales
 *.pem
 *.key
 .env
+
+#git
+.git/
+.gitignore
+
+#archivos sistema operativo
+.DS_Store
+Thumbs.db
