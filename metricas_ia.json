@@ -1162,7 +1162,7 @@
             1.0
         ],
         "ram_mb": 9.29,
-        "tiempo_s": 2.7487
+        "tiempo_s": 2.6479
     },
     "Random Forest": {
         "modelo": "Random Forest",
@@ -1391,6 +1391,6 @@
             1.0
         ],
         "ram_mb": 2.88,
-        "tiempo_s": 1.3358
+        "tiempo_s": 1.3004
     }
 }
